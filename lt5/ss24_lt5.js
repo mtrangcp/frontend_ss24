@@ -145,7 +145,7 @@ do {
                     } while (check);
 
                     for (let j = 0; j < row; j++) {
-                        sum += arr[index][j];
+                        sum += arr[j][index];
                     }
                     avg = sum / row;
 
