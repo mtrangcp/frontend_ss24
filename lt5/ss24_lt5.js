@@ -119,21 +119,37 @@ do {
                 alert(`Danh sách rỗng!`);
 
             } else {
-                let axes;
+                let axes, index, sum = 0, avg = 0;
                 do {
+                    axes = +prompt("1. Hàng\n2. Cột");
+                    check = axes === 1 || axes === 2 ? false : true;
+                } while (check);
 
-                } while (condition);
+                if (axes === 1) {
+                    do {
+                        index = +prompt("Nhập hàng: ");
+                        check = Number.isInteger(index) && index >= 0 && index < row ? false : true;
+                    } while (check);
 
-
-                arr.map((row) => row.reverse());
-                console.log("Kết quả đảo: ");
-                let html;
-                for (let i = 0; i < row; i++) {
-                    html = "";
                     for (let j = 0; j < col; j++) {
-                        html += arr[i][j] + " ";
+                        sum += arr[index][j];
                     }
-                    console.log(html);
+                    avg = sum / col;
+
+                    console.log(`Trung bình cộng hàng ${index}: ${avg}`);
+
+                } else {
+                    do {
+                        index = +prompt("Nhập cột: ");
+                        check = Number.isInteger(index) && index >= 0 && index < row ? false : true;
+                    } while (check);
+
+                    for (let j = 0; j < row; j++) {
+                        sum += arr[index][j];
+                    }
+                    avg = sum / row;
+
+                    console.log(`Trung bình cộng cột ${index}: ${avg}`);
                 }
             }
             break;
