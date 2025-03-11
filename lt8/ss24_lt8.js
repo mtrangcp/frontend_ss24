@@ -69,7 +69,22 @@ do {
                 alert(`Chuỗi rỗng!`);
 
             } else {
+                if (typeof (inputString) === 'String') inputString = inputString.split(" ");
 
+                let max = inputString[0], min = inputString[0];
+                let maxStrings = [], minStrings = [];
+                for (let i = 0; i < inputString.length; i++) {
+                    if (max.length < inputString[i].length) max = inputString[i];
+                    if (min.length > inputString[i].length) min = inputString[i];
+                }
+
+                for (let i = 0; i < inputString.length; i++) {
+                    if (inputString[i].length === max.length && !maxStrings.includes(inputString[i])) maxStrings.push(inputString[i]);
+                    if (inputString[i].length === min.length && !minStrings.includes(inputString[i])) minStrings.push(inputString[i]);
+                }
+
+                console.log("Chuỗi lớn nhất: ", maxStrings);
+                console.log("Chuỗi nhỏ nhất: ", minStrings);
             }
             break;
         }
@@ -78,8 +93,31 @@ do {
                 alert(`Chuỗi rỗng!`);
 
             } else {
-                const stringClone = [...inputString].join("").split(" ");
-                console.log("Số lượng từ trong chuỗi: ", stringClone.length);
+                let stringClone = [...inputString].join("").split("");
+                stringClone = stringClone.filter(char => char !== " ");
+
+                let count = 0;
+                let newChar = [];
+                let countChar = [];
+
+                for (let i = 0; i < stringClone.length; i++) {
+                    if (!newChar.includes(stringClone[i])) {
+                        newChar.push(stringClone[i]);
+
+                        count = 0;
+                        for (let j = 0; j < stringClone.length; j++) {
+                            if (stringClone[i] === stringClone[j]) {
+                                count++;
+                            }
+                        }
+                        countChar.push(count);
+                    }
+                }
+
+                console.log("Case 5:");
+                console.log("Các kí tự: ", newChar);
+                console.log("Số lần lặp: ", countChar);
+
             }
             break;
         }
@@ -88,25 +126,10 @@ do {
                 alert(`Chuỗi rỗng!`);
 
             } else {
-                let char1, char2;
-                do {
-                    char1 = prompt("Nhập kí tự cần thay thế: ");
-                    check = char1.length === 1 ? false : true;
-                } while (check);
+                let stringClone = [...inputString].join(" ");
 
-                do {
-                    char2 = prompt("Nhập kí tự mới: ");
-                    check = char1.length === 1 ? false : true;
-                } while (check);
-
-                if (inputString.includes(char1)) {
-                    let newString = inputString.replaceAll(char1, char2);
-                    console.log("Chuỗi mới: ", newString);
-
-                } else {
-                    console.log(`Không tìm thấy kí ${char1} tự cần thay thế!`);
-                }
-
+                stringClone = stringClone.replaceAll(" ", "_");
+                console.log("New String: ", stringClone);
             }
             break;
         }
